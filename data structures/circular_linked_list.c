@@ -11,12 +11,16 @@ typedef struct node
 //返回链表的长度
 int size(list head)
 {
+	if (head == NULL)
+		return 0;
+	
 	int i = 0;
-	while (head)
+	node *p = head;
+	do
 	{
 		i++;
 		head = head->next;
-	}
+	} while (p != head);
 	
 	return i;
 }
@@ -35,17 +39,22 @@ list insert(list head, int val, int pos)
 	//表头插入结点的情况
 	if (pos == 0)
 	{
+		node *last_node = head;
+		while (last_node->next != head)
+			last_node = last_node->next;
+
+		last_node->next = new_node;
 		new_node->next = head;
 		return new_node;
 	}
 	
 	//指定位置插入结点
-	node *pre = head;
+	node *prev_node = head;
 	int i;
-	for (i = 1; i < pos; i++) //也可以是 (i = 0; i < pos - 1; i++) 
-		pre = pre->next;
-	new_node->next = pre->next;
-	pre->next = new_node;
+	for (i = 0; i < pos - 1; i++) 
+		prev_node = prev_node->next;
+	new_node->next = prev_node->next;
+	prev_node->next = new_node;
 
 	//返回链表
 	return head;
@@ -57,17 +66,19 @@ list insert_last(list head, int val)
 	//新建结点
 	node *new_node = (node *)malloc(sizeof(node));
 	new_node->data = val;
-	new_node->next = NULL;
+	new_node->next = head;
 	
 	//链表为空的情况
 	if (head == NULL)
+	{
+		new_node->next = new_node;
 		return new_node;
-
+	}
 	//链表最后插入结点
-	node *last = head;
-	while (last->next)
-		last = last->next;
-	last->next = new_node;
+	node *last_node = head;
+	while (last_node->next != head)
+		last_node = last_node->next;
+	last_node->next = new_node;
 	
 	//返回链表
 	return head;
@@ -75,12 +86,13 @@ list insert_last(list head, int val)
 
 node *search(list head, int val)
 {
-	while (head != NULL)
+	node *p = head;
+	while (p != head)
 	{
-		if (head->data == val)
-			return head;
+		if (p->data == val)
+			return p;
 		else
-			head = head->next;
+			p = p->next;
 	}
 
 	return NULL;
@@ -96,19 +108,25 @@ list del(list head, int pos)
 	//删除表头的情况
 	if (pos == 0)
 	{
+		node *last_node = head;
+		while (last_node->next != head)
+			last_node = last_node->next;
+
 		node *tmp = head;
 		head = head->next;
+		last_node->next = head;
 		free(tmp);
+
 		return head;
 	}
 
 	//指定位置删除结点
-	node *pre = head;
+	node *prev_node = head;
 	int i;
-	for (i = 1; i < pos; i++) //也可以是 (i = 0; i < pos - 1; i++)
-		pre = pre->next;
-	node *tmp = pre->next;
-	pre->next = tmp->next;
+	for (i = 0; i < pos - 1; i++)
+		prev_node = prev_node->next;
+	node *tmp = prev_node->next;
+	prev_node->next = tmp->next;
 	free(tmp);
 
 	//返回链表
@@ -118,18 +136,23 @@ list del(list head, int pos)
 //输出链表
 void print(list head)
 {
-	while (head)
+	if (head == NULL)
+		return;
+
+	node *p = head;
+	do
 	{
-		printf("%d ", head->data);
-		head = head->next;
-	}
+		printf("%d ", p->data);
+		p = p->next;
+	} while (p != head);
 	printf("\n");
 }
 
 //销毁链表
 void destroy(list head)
 {
-	while (head)
+	int i;
+	for (i = 0; i < size(head); i++)
 	{
 		node *tmp = head;
 		head = head->next;
