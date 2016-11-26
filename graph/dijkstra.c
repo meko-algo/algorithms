@@ -4,7 +4,8 @@
 #define V 9
 
 //在剩下的顶点中寻找距离起始点最近的顶点
-int min_dist(int dist[], int sptree[]) {
+int min_dist(int dist[], int sptree[]) 
+{
     //INI_MAX是定义在limits.h的表示C语言int最大值得数
     int min = INT_MAX, min_index;
 
@@ -17,7 +18,8 @@ int min_dist(int dist[], int sptree[]) {
 }
 
 //输出结果
-int print(int dist[], int n) {
+int print(int dist[], int n) 
+{
     printf("Vertex   Distance from Source\n");
     int i;
     for (i = 0; i < V; i++)
@@ -25,7 +27,8 @@ int print(int dist[], int n) {
 }
 
 //dijkstra单一起点最小路径算法
-void dijkstra(int graph[V][V], int src) {
+void dijkstra(int graph[V][V], int src) 
+{
     //每个顶点与起始点的距离
     int dist[V];
 
@@ -42,7 +45,8 @@ void dijkstra(int graph[V][V], int src) {
     dist[src] = 0;
 
     //计算到所有顶点的最短路径
-    for (i = 0; i < V - 1; i++) {
+    for (i = 0; i < V - 1; i++) 
+    {
         //在剩下的顶点中寻找距离起始点最近的顶点
         int u = min_dist(dist, sptree);
         //将这个顶点包含到最短路径树中

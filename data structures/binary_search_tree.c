@@ -56,7 +56,8 @@ node* search(tree root, int val)
 }
 
 //寻找指定子树的最小值结点
-node* findmin(tree root) {
+node* findmin(tree root)
+{
 	while (root->left != NULL) root = root->left;
 	return root;
 }
@@ -76,17 +77,20 @@ node* del(node *root, int val)
 	//如果要删除的数等于头结点的数，则接下来删除这个结点
 	else {
 		// Case 1: 如果该结点没有孩子结点，则直接删除
-		if (root->left == NULL && root->right == NULL) {
+		if (root->left == NULL && root->right == NULL) 
+		{
 			free(root);
 			root = NULL;
 		}
 		// Case 2: 如果该结点有一个孩子节点，则删除该结点并返回其孩子结点(在函数最后return)
-		else if (root->left == NULL) {
+		else if (root->left == NULL) 
+		{
 			node *temp = root;
 			root = root->right;
 			free(temp);
 		}
-		else if (root->right == NULL) {
+		else if (root->right == NULL) 
+		{
 			node *temp = root;
 			root = root->left;
 			free(temp);
@@ -94,7 +98,8 @@ node* del(node *root, int val)
 		// Case 3: 如果该结点有两个孩子节点，
 		// 则先找右子树里的最小值结点和该结点交换，然后再在右子树里边继续删除
 		// 或先找左子树里的最大值结点和该结点交换，然后再在左子树里边继续删除
-		else {
+		else 
+		{
 			node *temp = findmin(root->right);
 			root->data = temp->data;
 			root->right = del(root->right, temp->data);

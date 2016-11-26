@@ -31,11 +31,11 @@ int print(int parent[], int n, int graph[V][V])
 void prim(int graph[V][V])
 {
     //parent用来保存每个顶点在最小生成树里的父结点
-    int parent[V]; // Array to store constructed MST
+    int parent[V];
     //key用来保存每个顶点距离目前最小生成树的距离
-    int key[V];   // Key values used to pick minimum weight edge in cut
+    int key[V];
     //mstree用来保存目前最小生成树已经包含的顶点，mstree[i]=1表示顶点i在最小生成树里，否则不在
-    int mstree[V];  // To represent set of vertices not yet included in MST
+    int mstree[V];
     
     //将key全都初始化为INT_MAX
     //mstree初始化不包含任何顶点

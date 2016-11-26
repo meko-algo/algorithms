@@ -113,7 +113,7 @@ void Graph::dfs()
 //主函数
 int main()
 {
-    //新建一个图
+    //新建一个图(参照undirected.jpg)
     Graph g(9);
     g.add_edge(0, 1); g.add_edge(0, 7);
     g.add_edge(1, 0); g.add_edge(1, 2); g.add_edge(1, 7);
