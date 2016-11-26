@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 //定义栈数据类型
-typedef struct stack 
+typedef struct stack
 {
 	int *data;
 	int top;
