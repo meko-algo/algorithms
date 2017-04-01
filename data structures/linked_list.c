@@ -17,7 +17,7 @@ int size(list head)
 		i++;
 		head = head->next;
 	}
-	
+
 	return i;
 }
 
@@ -27,18 +27,18 @@ list insert(list head, int val, int pos)
 	//指定的位置超出范围直接返回
 	if (pos > size(head))
 		return head;
-	
+
 	//新建一个结点
 	node *new_node = (node *)malloc(sizeof(node));
 	new_node->data = val;
-	
+
 	//表头插入结点的情况
 	if (pos == 0)
 	{
 		new_node->next = head;
 		return new_node;
 	}
-	
+
 	//指定位置插入结点
 	node *pre = head;
 	int i;
@@ -58,7 +58,7 @@ list insert_last(list head, int val)
 	node *new_node = (node *)malloc(sizeof(node));
 	new_node->data = val;
 	new_node->next = NULL;
-	
+
 	//链表为空的情况
 	if (head == NULL)
 		return new_node;
@@ -68,7 +68,7 @@ list insert_last(list head, int val)
 	while (last->next)
 		last = last->next;
 	last->next = new_node;
-	
+
 	//返回链表
 	return head;
 }

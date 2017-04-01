@@ -13,7 +13,7 @@ typedef struct stack
 stack create(int size)
 {
 	if (size <= 0) 	return NULL;
-	
+
 	stack s = (stack)malloc(sizeof(struct stack));
 	s->data = (int *)malloc(sizeof(int) * size);
 	s->top = 0;
@@ -43,7 +43,7 @@ int peek(stack s)
 	if (s->top == 0)
 		printf("Stack is empty");
 	else
-		return s->data[s->top];
+		return s->data[s->top - 1];
 }
 
 //出栈
@@ -79,6 +79,6 @@ int main()
 	push(s, 6);	print(s);
 	pop(s);		print(s);
 	push(s, 8);	print(s);
-	
+
 	return 0;
 }

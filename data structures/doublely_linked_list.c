@@ -17,7 +17,6 @@ int size(list head)
       i++;
       head = head->next;
    }
-   
    return i;
 }
 
@@ -28,13 +27,13 @@ list insert(list head, int val, int pos)
    int list_size = size(head);
    if (pos > list_size)
       return head;
-   
+
    //新建一个结点
    node *new_node = (node *)malloc(sizeof(node));
    new_node->data = val;
 
    new_node->next = NULL;
-   
+
    //表头插入结点的情况
    if (pos == 0)
    {
@@ -49,7 +48,7 @@ list insert(list head, int val, int pos)
    int i;
    for (i = 0; i < pos - 1; i++)
       prev_node = prev_node->next;
-   
+
    //双向链表的插入操作
    new_node->next = prev_node->next;
    new_node->prev = prev_node;
@@ -80,7 +79,7 @@ list insert_last(list head, int val)
       last_node = last_node->next;
    new_node->prev = last_node;
    last_node->next = new_node;
-   
+
    //返回链表
    return head;
 }
@@ -94,7 +93,6 @@ node *search(list head, int val)
       else
          head = head->next;
    }
-
    return NULL;
 }
 
