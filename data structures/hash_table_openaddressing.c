@@ -4,8 +4,7 @@
 //哈希表大小
 #define MAX_SIZE 20
 #define EMPTY -1
-#define OCCUPIED -2
-#define DELETED	-3
+#define DELETED	-2
 
 //初始化哈希表为数组
 int hash_table[MAX_SIZE];
@@ -28,11 +27,12 @@ int search(int val)
     //如果hash_table[i]等于val，则返回1
     //如果hash_table[i]不等于val，则继续查看下一位
     int i;
-    for (i = hash_code; i < hash_code + MAX_SIZE; i = (i + 1) % MAX_SIZE)
+    for (i = hash_code; i < hash_code + MAX_SIZE; i++)
     {
-        if (hash_table[i] == EMPTY)
+				int j = i % MAX_SIZE;
+        if (hash_table[j] == EMPTY)
             return 0;
-        if (hash_table[i] == val)
+        if (hash_table[j] == val)
             return 1;
     }
 
@@ -55,7 +55,7 @@ void insert(int val)
     //如果hash_table[i]没有存值，则存放val
     //如果hash_table[i]有值，则存放在后边第一个没有存值得地方（可以循环到前边）
     int i = hash_code;
-    while (hash_table[i] == OCCUPIED)
+    while (hash_table[i] != EMPTY && hash_table[i] != DELETED)
         i = (i + 1) % MAX_SIZE;
     hash_table[i] = val;
 
@@ -72,13 +72,14 @@ int del(int val)
     //如果hash_table[i]等于val，则将其值置为-1（等效于删除）
     //如果hash_table[i]不等于val，则继续比较下一位
     int i;
-    for (i = hash_code; i < hash_code + MAX_SIZE; i = (i + 1) % MAX_SIZE)
+    for (i = hash_code; i < hash_code + MAX_SIZE; i++)
     {
-        if (hash_table[i] == EMPTY)
+				int j = i % MAX_SIZE;
+        if (hash_table[j] == EMPTY)
             return 0;
-        if (hash_table[i] == val)
+        if (hash_table[j] == val)
         {
-            hash_table[i] = DELETED;
+            hash_table[j] = DELETED;
             size--;
             return 1;
         }
@@ -92,7 +93,7 @@ void print(int hash_table[])
 {
     int i;
     for (i = 0; i < MAX_SIZE; i++)
-        if (hash_table[i] != OCCUPIED)
+        if (hash_table[i] == EMPTY || hash_table[i] == DELETED)
             printf("X ");
         else
             printf("%d ", hash_table[i]);
