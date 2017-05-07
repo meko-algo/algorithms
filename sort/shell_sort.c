@@ -14,16 +14,16 @@ void shell_sort(int nums[], int n)
 	for (gap = n/2; gap > 0; gap /= 2)
 	{
 		int i;
-		for (i = gap; i < n; i += 1)
+		for (i = 0; i < n; i += 1)
 		{
 			int key = nums[i];
-			int j = i;
-			while (j >= gap && nums[j - gap] > key)
+			int j = i - gap;
+			while (j >= 0 && nums[j] > key)
 			{
-				nums[j] = nums[j - gap];
+				nums[j + gap] = nums[j];
 				j -= gap;
 			}
-			nums[j] = key;
+			nums[j + gap] = key;
 		}
 	}
 }
